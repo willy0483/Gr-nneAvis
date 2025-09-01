@@ -15,7 +15,7 @@ const Header = () => {
   };
 
   return (
-    <header className=" h-[80px] px-4 sm:px-0 container mx-auto bg-app-surface text-app-text flex items-center justify-between">
+    <header className=" h-[80px] px-4 sm:px-0 container mx-auto flex items-center justify-between">
       {/* logo */}
       <Link to={"/"}>
         <h1 className="text-4xl font-semibold">

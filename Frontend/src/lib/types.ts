@@ -63,19 +63,20 @@ export interface User {
 
 export interface T_Product {
   id: number;
-  title: string;
+  name: string;
   slug: string;
-  description: string;
-  imageUrl: string;
-  procedure: string;
-  durationInMinutes: number;
-  amount: number;
-  price: number;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-  favorites: T_Favorite[];
-  numFavorites: number;
+  image: string;
+  price: string;
+}
+
+export interface T_Category {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface T_Donations {
+  theme: string;
 }
 
 export interface T_Favorite {

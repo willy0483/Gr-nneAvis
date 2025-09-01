@@ -26,9 +26,4 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  server: {
-    proxy: {
-      "/images": "http://localhost:8000",
-    },
-  },
 });
