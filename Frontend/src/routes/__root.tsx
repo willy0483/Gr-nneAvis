@@ -14,9 +14,8 @@ export const Route = createRootRoute({
       {/* auth and userData */}
       <AuthProvider>
         <Header />
-        <section className="min-h-[calc(100vh-80px)]">
-          <Outlet />
-        </section>
+        <hr className="py-[2px] bg-app-primary my-10 container mx-auto" />
+        <Outlet />
         <Toaster />
         <Footer />
         {/* Add dev tools for router */}
