@@ -29,7 +29,7 @@ const Header = () => {
       </Link>
 
       {/* desktop nav */}
-      <div className="hidden md:flex items-center gap-8">
+      <div className="hidden xl:flex items-center gap-8">
         <Nav />
 
         {!isLoggedIn ? (
@@ -61,7 +61,7 @@ const Header = () => {
       </div>
 
       {/* mobile nav */}
-      <div className="md:hidden">
+      <div className="xl:hidden">
         <MobileNav />
       </div>
     </header>
