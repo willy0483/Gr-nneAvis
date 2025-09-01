@@ -5,7 +5,7 @@ export const Spinner = () => (
       width="80"
       height="80"
       viewBox="0 0 24 24"
-      color="#2563eb"
+      color="#1d8439"
     >
       <path
         fill="currentColor"
