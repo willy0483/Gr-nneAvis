@@ -75,7 +75,11 @@ function Index() {
       <h2 className="text-[18px]">Udvalgte Produkter</h2>
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 py-2">
         {product.slice(0, 6).map(({ id, name, image, slug }) => (
-          <Link to="/products/$product" params={{ product: slug }} key={id}>
+          <Link
+            to="/category/product/$product"
+            params={{ product: slug }}
+            key={id}
+          >
             <figure className="relative h-48 w-full overflow-hidden shadow border flex flex-col justify-end group">
               <img
                 src={image}
@@ -120,7 +124,7 @@ function Index() {
         <h2 className="text-[18px]">Udvalgte Produkter</h2>
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 py-2">
           {categories.slice(0, 6).map(({ id, name, slug }) => (
-            <Link to="/products/$category" params={{ category: slug }} key={id}>
+            <Link to="/category/$category" params={{ category: slug }} key={id}>
               <figure className="relative h-48 w-full overflow-hidden shadow border flex flex-col justify-end">
                 <img
                   src={`/images/kategorier/${slug}.jpg`}

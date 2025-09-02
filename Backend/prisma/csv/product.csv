@@ -19,3 +19,18 @@ id,name,image,description,price,slug,categoryId,userId
 18,Trommesæt,https://images.pexels.com/photos/4087992/pexels-photo-4087992.jpeg?auto=compress&cs=tinysrgb&w=1200,Komplet trommesæt med bækkener,8500,trommesaet,9,2
 19,Fladskærms-TV,https://images.pexels.com/photos/10078142/pexels-photo-10078142.jpeg?auto=compress&cs=tinysrgb&w=1200,55 Smart TV med 4K opløsning,6000,fladskaerms-tv,10,1
 20,Surround sound system,https://images.pexels.com/photos/19482598/pexels-photo-19482598/free-photo-of-old-stereo-in-a-living-room.jpeg?auto=compress&cs=tinysrgb&w=1200,Hjemmebiograf lydsystem med subwoofer,4500,surround-sound-system,10,2
+21,Sovepose,https://images.pexels.com/photos/2376989/pexels-photo-2376989.jpeg?auto=compress&cs=tinysrgb&w=1200,Varm og kompakt sovepose til kølige nætter,600,sovepose,1,2
+22,Campingkøleskab,https://images.pexels.com/photos/733087/pexels-photo-733087.jpeg?auto=compress&cs=tinysrgb&w=1200,12V bærbar køleskab til mad og drikke,1100,campingkoleskab,1,1
+23,Campingkøkken,https://images.pexels.com/photos/40185/mac-freelancer-macintosh-macbook-40185.jpeg?auto=compress&cs=tinysrgb&w=1200,Samlepakke med gasblus og kogekar,800,campingkokken,1,2
+24,Campingstol,https://images.pexels.com/photos/377711/pexels-photo-377711.jpeg?auto=compress&cs=tinysrgb&w=1200,Letvægtscampingstol til afslapning ved bålet,300,campingstol,1,1
+25,Campingbord,https://images.pexels.com/photos/4162011/pexels-photo-4162011.jpeg?auto=compress&cs=tinysrgb&w=1200,Justerbart og foldbart bord til måltider,500,campingbord,1,2
+26,Powerbank,https://images.pexels.com/photos/8821015/pexels-photo-8821015.jpeg?auto=compress&cs=tinysrgb&w=1200,20000mAh solcpowerbank til enheder,450,powerbank,1,1
+27,Vandtæt oppakning,https://images.pexels.com/photos/10548744/pexels-photo-10548744.jpeg?auto=compress&cs=tinysrgb&w=1200,Vandafvisende rygsæk til dine værdigenstande,700,vandtaet-oppakning,1,2
+28,Multiværktøj,https://images.pexels.com/photos/1599005/pexels-photo-1599005.jpeg?auto=compress&cs=tinysrgb&w=1200,Alsidigt værktøj til reparationer i marken,350,multivarktoj,1,1
+29,Campinglampe,https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg?auto=compress&cs=tinysrgb&w=1200,LED-lampe med justerbar lysstyrke,200,campinglampe,1,2
+30,Soppepuder,https://images.pexels.com/photos/8926943/pexels-photo-8926943.jpeg?auto=compress&cs=tinysrgb&w=1200,Kompressible puder til komfortabel søvn,150,soppepuder,1,1
+31,Vandfilter,https://images.pexels.com/photos/2116156/pexels-photo-2116156.jpeg?auto=compress&cs=tinysrgb&w=1200,Personelt vandfilter til sikker drikkevand,280,vandfilter,1,2
+32,Stormkøkken,https://images.pexels.com/photos/3806252/pexels-photo-3806252.jpeg?auto=compress&cs=tinysrgb&w=1200,Robust køkken til vandreture og camping,950,stormkokken,1,1
+33,Groundsheet,https://images.pexels.com/photos/287720/pexels-photo-287720.jpeg?auto=compress&cs=tinysrgb&w=1200,Vandtæt underlag til teltsæt,250,groundsheet,1,2
+34,Campinggrill,https://images.pexels.com/photos/4406715/pexels-photo-4406715.jpeg?auto=compress&cs=tinysrgb&w=1200,Lille transportabel grill til madlavning,400,campinggrill,1,1
+35,Tarp,https://images.pexels.com/photos/6608247/pexels-photo-6608247.jpeg?auto=compress&cs=tinysrgb&w=1200,Beskyttende presenning mod regn og sol,320,tarp,1,2
