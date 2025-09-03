@@ -20,11 +20,9 @@ export const Route = createFileRoute("/(auth)/signup/")({
 
 function RouteComponent() {
   return (
-    <section className="w-full">
+    <section className="w-full h-full pb-10">
       <div className="p-8 mx-auto flex flex-col justify-center items-center ">
-        <h1 className="text-center text-2xl font-bold text-app-primary">
-          Sign Up
-        </h1>
+        <h1 className="text-center text-2xl font-bold ">Opret en konto</h1>
         <SignUpForm />
       </div>
       <hr className="py-[2px] bg-app-primary my-10 container mx-auto" />

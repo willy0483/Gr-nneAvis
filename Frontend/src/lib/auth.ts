@@ -49,18 +49,28 @@ export const signup = async (
   formData: FormData
 ): Promise<FormState> => {
   const validatedFields = SignupFormSchema.safeParse({
-    name: formData.get("name"),
     email: formData.get("email"),
     password: formData.get("password"),
+    firstname: formData.get("firstname"),
+    lastname: formData.get("lastname"),
+    address: formData.get("address"),
+    city: formData.get("city"),
+    zipcode: formData.get("zipcode"),
   });
+
+  console.log(validatedFields);
 
   if (!validatedFields.success) {
     const fieldErrors = validatedFields.error.flatten().fieldErrors;
     return {
       error: {
-        name: fieldErrors.name,
         email: fieldErrors.email,
         password: fieldErrors.password,
+        firstname: fieldErrors.firstname,
+        lastname: fieldErrors.lastname,
+        address: fieldErrors.address,
+        city: fieldErrors.city,
+        zipcode: fieldErrors.zipcode,
       },
     };
   }
@@ -72,9 +82,9 @@ export const signup = async (
     },
     body: JSON.stringify({
       ...validatedFields.data,
-      image: "1",
       isActive: 1,
-      description: "test",
+      hasNewsletter: true,
+      hasNotification: true,
       refreshToken: "refreshToken",
     }),
   });
@@ -84,7 +94,7 @@ export const signup = async (
   } else {
     return {
       message:
-        response.status === 409
+        response.status === 500
           ? "The user already existed!"
           : response.statusText,
     };
