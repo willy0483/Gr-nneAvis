@@ -14,6 +14,7 @@ import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsIndexRouteImport } from './routes/products/index'
 import { Route as CategoryIndexRouteImport } from './routes/category/index'
+import { Route as AnnonceIndexRouteImport } from './routes/annonce/index'
 import { Route as ProductsProductRouteImport } from './routes/products/$product'
 import { Route as CategoryCategoryRouteImport } from './routes/category/$category'
 import { Route as authSignupIndexRouteImport } from './routes/(auth)/signup/index'
@@ -43,6 +44,11 @@ const CategoryIndexRoute = CategoryIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => CategoryRouteRoute,
+} as any)
+const AnnonceIndexRoute = AnnonceIndexRouteImport.update({
+  id: '/annonce/',
+  path: '/annonce/',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsProductRoute = ProductsProductRouteImport.update({
   id: '/products/$product',
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/category': typeof CategoryRouteRouteWithChildren
   '/category/$category': typeof CategoryCategoryRoute
   '/products/$product': typeof ProductsProductRoute
+  '/annonce': typeof AnnonceIndexRoute
   '/category/': typeof CategoryIndexRoute
   '/products': typeof ProductsIndexRoute
   '/category/product/$product': typeof CategoryProductProductRoute
@@ -85,6 +92,7 @@ export interface FileRoutesByTo {
   '/': typeof authRouteRouteWithChildren
   '/category/$category': typeof CategoryCategoryRoute
   '/products/$product': typeof ProductsProductRoute
+  '/annonce': typeof AnnonceIndexRoute
   '/category': typeof CategoryIndexRoute
   '/products': typeof ProductsIndexRoute
   '/category/product/$product': typeof CategoryProductProductRoute
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/category': typeof CategoryRouteRouteWithChildren
   '/category/$category': typeof CategoryCategoryRoute
   '/products/$product': typeof ProductsProductRoute
+  '/annonce/': typeof AnnonceIndexRoute
   '/category/': typeof CategoryIndexRoute
   '/products/': typeof ProductsIndexRoute
   '/category/product/$product': typeof CategoryProductProductRoute
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/category'
     | '/category/$category'
     | '/products/$product'
+    | '/annonce'
     | '/category/'
     | '/products'
     | '/category/product/$product'
@@ -121,6 +131,7 @@ export interface FileRouteTypes {
     | '/'
     | '/category/$category'
     | '/products/$product'
+    | '/annonce'
     | '/category'
     | '/products'
     | '/category/product/$product'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/category'
     | '/category/$category'
     | '/products/$product'
+    | '/annonce/'
     | '/category/'
     | '/products/'
     | '/category/product/$product'
@@ -145,6 +157,7 @@ export interface RootRouteChildren {
   authRouteRoute: typeof authRouteRouteWithChildren
   CategoryRouteRoute: typeof CategoryRouteRouteWithChildren
   ProductsProductRoute: typeof ProductsProductRoute
+  AnnonceIndexRoute: typeof AnnonceIndexRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
 }
 
@@ -184,6 +197,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/category/'
       preLoaderRoute: typeof CategoryIndexRouteImport
       parentRoute: typeof CategoryRouteRoute
+    }
+    '/annonce/': {
+      id: '/annonce/'
+      path: '/annonce'
+      fullPath: '/annonce'
+      preLoaderRoute: typeof AnnonceIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/products/$product': {
       id: '/products/$product'
@@ -258,6 +278,7 @@ const rootRouteChildren: RootRouteChildren = {
   authRouteRoute: authRouteRouteWithChildren,
   CategoryRouteRoute: CategoryRouteRouteWithChildren,
   ProductsProductRoute: ProductsProductRoute,
+  AnnonceIndexRoute: AnnonceIndexRoute,
   ProductsIndexRoute: ProductsIndexRoute,
 }
 export const routeTree = rootRouteImport

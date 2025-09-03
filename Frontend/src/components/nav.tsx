@@ -9,14 +9,20 @@ import {
 } from "./ui/select";
 import { createCategoriesQueryOptions } from "@/queryOptions/createCategoryQueryOptions";
 import { useNavigate } from "@tanstack/react-router";
+import { useAuth } from "@/lib/utils";
 
 const Nav = () => {
   const { data } = useSuspenseQuery(createCategoriesQueryOptions());
+  const { loginData } = useAuth();
 
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate({ to: "/annonce" });
+    if (loginData) {
+      navigate({ to: "/annonce" });
+    } else {
+      navigate({ to: "/login" });
+    }
   };
 
   return (
