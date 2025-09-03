@@ -53,12 +53,13 @@ export interface CreateUser {
   name: string;
   email: string;
   password: string;
-  image: string;
 }
 
 export interface User {
+  firstname: string;
+  lastname: string;
+  email: string;
   id: number;
-  name: string;
 }
 
 export interface T_Product {
@@ -67,6 +68,7 @@ export interface T_Product {
   slug: string;
   image: string;
   price: string;
+  description: string;
 }
 
 export interface T_Category {
@@ -79,40 +81,18 @@ export interface T_Donations {
   theme: string;
 }
 
-export interface T_Favorite {
+export interface T_ProductDetails {
+  id: number;
+  name: string;
+  image: string;
+  description: string;
+  price: string;
+  slug: string;
+  categoryId: number;
   userId: number;
 }
 
-export interface T_ProductDetails {
-  id: number;
-  title: string;
-  slug: string;
-  description: string;
-  imageUrl: string;
-  procedure: string;
-  durationInMinutes: number;
-  amount: number;
-  price: number;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-  productIngredients: ProductIngredient[];
-}
-export interface ProductIngredient {
-  id: number;
-  productId: number;
-  ingredientId: number;
-  unitId: number;
-  amount: number;
-  orderNum: number;
-  ingredients: Ingredients;
-  units: Units;
-}
-export interface Ingredients {
-  title: string;
-}
-
-export interface Units {
-  name: string;
-  abbreviation: string;
+export interface T_Comment {
+  comment: string;
+  user: User;
 }

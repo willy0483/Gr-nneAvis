@@ -98,15 +98,17 @@ function RouteComponent() {
     );
 
   return (
-    <div className=" container mx-auto">
+    <div className="container mx-auto bg-app-background">
       {isPending ? (
         <div className="flex flex-col justify-center items-center min-h-[calc(100vh-80px)]">
           <Spinner />
         </div>
       ) : (
         <>
-          <section className="flex justify-between items-center">
-            <h2 className="text-2xl py-4">Products</h2>
+          <section className="flex justify-between items-center bg-app-surface rounded-lg px-4 py-2 mb-2">
+            <h2 className="text-2xl py-4 text-app-primary font-bold">
+              Products
+            </h2>
             <div>
               <Select
                 value={sortBy}
@@ -150,11 +152,11 @@ function RouteComponent() {
               pageRangeDisplayed={3}
               pageCount={pageCount}
               renderOnZeroPageCount={null}
-              containerClassName="flex gap-1 items-center select-none"
-              pageLinkClassName="px-3 py-1 rounded hover:cursor-pointer hover:bg-app-surface hover:text-app-accent transition-colors"
-              activeClassName="text-app-accent"
-              previousLinkClassName="px-3 py-1 rounded text-app-secondary hover:cursor-pointer hover:bg-app-surface transition-colors"
-              nextLinkClassName="px-3 py-1 rounded text-app-secondary hover:cursor-pointer hover:bg-app-surface transition-colors"
+              containerClassName="flex gap-1 items-center select-none bg-app-surface p-2 rounded-lg"
+              pageLinkClassName="px-3 py-1 rounded hover:cursor-pointer hover:bg-app-secondary hover:text-app-accent transition-colors text-app-primary"
+              activeClassName="bg-app-primary text-white"
+              previousLinkClassName="px-3 py-1 rounded text-app-secondary hover:cursor-pointer hover:bg-app-primary hover:text-white transition-colors"
+              nextLinkClassName="px-3 py-1 rounded text-app-secondary hover:cursor-pointer hover:bg-app-primary hover:text-white transition-colors"
               breakLinkClassName="px-3 py-1 text-app-muted"
               disabledClassName="opacity-40"
               forcePage={currentPage}
