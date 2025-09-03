@@ -53,12 +53,13 @@ export interface CreateUser {
   name: string;
   email: string;
   password: string;
-  image: string;
 }
 
 export interface User {
+  firstname: string;
+  lastname: string;
+  email: string;
   id: number;
-  name: string;
 }
 
 export interface T_Product {
@@ -89,4 +90,9 @@ export interface T_ProductDetails {
   slug: string;
   categoryId: number;
   userId: number;
+}
+
+export interface T_Comment {
+  comment: string;
+  user: User;
 }

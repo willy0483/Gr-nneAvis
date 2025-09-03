@@ -1,3 +1,4 @@
+import Comments from "@/components/comments";
 import { Spinner } from "@/components/spinner";
 import { createProductDetailsQueryOptions } from "@/queryOptions/createProductsQueryOptions.ts";
 import { useSuspenseQuery } from "@tanstack/react-query";
@@ -75,7 +76,30 @@ function RouteComponent() {
         </div>
         <hr className="py-[2px] bg-app-primary my-5 container mx-auto" />
       </section>
-      <section>{/* Kontakt sælger */}</section>
+      <section className="max-w-3xl mx-auto">
+        <h2 className=" text-center text-app-primary text-3xl">
+          Kontakt sælger
+        </h2>
+        <div className="flex flex-col gap-2 mt-6">
+          <textarea
+            className="border-2 border-app-accent focus:outline-none focus:ring-2 focus:ring-app-primary resize-none bg-[#fafafa] p-2 min-h-[120px] text-base transition w-full"
+            name="kontakt"
+            id="kontakt"
+            placeholder="Skriv en besked til sælger....."
+          ></textarea>
+          <div className="flex justify-end mt-2">
+            <button
+              className="bg-app-primary hover:cursor-pointer text-white px-6 py-2 shadow hover:bg-green-700 transition-colors"
+              type="button"
+            >
+              send
+            </button>
+          </div>
+        </div>
+        <article>
+          <Comments id={item.id} userId={item.userId} />
+        </article>
+      </section>
     </>
   );
 }

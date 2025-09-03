@@ -86,7 +86,7 @@ function RouteComponent() {
           </div>
         </div>
       ) : isPending ? (
-        <div className="flex flex-col justify-center items-center min-h-[calc(100vh-80px)]">
+        <div className="flex flex-col justify-center items-center min-h-[calc(100vh-180px)]">
           <Spinner />
         </div>
       ) : (
