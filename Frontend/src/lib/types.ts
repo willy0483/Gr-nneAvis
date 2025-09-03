@@ -4,6 +4,11 @@ export type FormState =
   | {
       error?: {
         name?: string[];
+        firstname?: string[];
+        lastname?: string[];
+        address?: string[];
+        city?: string[];
+        zipcode?: string[];
         email?: string[];
         password?: string[];
       };
@@ -21,12 +26,6 @@ export const LoginFormSchema = z.object({
 });
 
 export const SignupFormSchema = z.object({
-  name: z
-    .string()
-    .min(2, {
-      message: "Name must be at least 2 characters long.",
-    })
-    .trim(),
   email: z.string().email({ message: "Please enter a valid email." }).trim(),
   password: z
     .string()
@@ -41,6 +40,19 @@ export const SignupFormSchema = z.object({
       message: " Contain at least one special character.",
     })
     .trim(),
+  firstname: z
+    .string()
+    .min(2, { message: "First name must be at least 2 characters." }),
+  lastname: z
+    .string()
+    .min(2, { message: "Last name must be at least 2 characters." }),
+  address: z
+    .string()
+    .min(2, { message: "Address must be at least 2 characters." }),
+  city: z.string().min(2, { message: "City must be at least 2 characters." }),
+  zipcode: z
+    .string()
+    .min(2, { message: "Zip code must be at least 2 characters." }),
 });
 
 export interface Session {
