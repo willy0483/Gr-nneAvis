@@ -1,9 +1,38 @@
 import z from "zod";
 
+export type AnnonceFormState =
+  | {
+      error?: {
+        title?: string[];
+        category?: string[];
+        text?: string[];
+        url?: string[];
+        price?: string[];
+      };
+      message?: string;
+      success?: boolean;
+    }
+  | undefined;
+
+export const AnnonceFormSchema = z.object({
+  title: z.string().min(2, { message: "Title must be at least 2 characters." }),
+  category: z
+    .number()
+    .min(1, { message: "Category must be at least 1 selecte." }),
+  text: z.string().min(2, { message: "Text must be at least 2 characters." }),
+  url: z.string().url({ message: "Must be a valid URL." }),
+  price: z.number().min(0, { message: "Price must be a positive number." }),
+});
+
 export type FormState =
   | {
       error?: {
         name?: string[];
+        firstname?: string[];
+        lastname?: string[];
+        address?: string[];
+        city?: string[];
+        zipcode?: string[];
         email?: string[];
         password?: string[];
       };
@@ -21,12 +50,6 @@ export const LoginFormSchema = z.object({
 });
 
 export const SignupFormSchema = z.object({
-  name: z
-    .string()
-    .min(2, {
-      message: "Name must be at least 2 characters long.",
-    })
-    .trim(),
   email: z.string().email({ message: "Please enter a valid email." }).trim(),
   password: z
     .string()
@@ -41,6 +64,19 @@ export const SignupFormSchema = z.object({
       message: " Contain at least one special character.",
     })
     .trim(),
+  firstname: z
+    .string()
+    .min(2, { message: "First name must be at least 2 characters." }),
+  lastname: z
+    .string()
+    .min(2, { message: "Last name must be at least 2 characters." }),
+  address: z
+    .string()
+    .min(2, { message: "Address must be at least 2 characters." }),
+  city: z.string().min(2, { message: "City must be at least 2 characters." }),
+  zipcode: z
+    .string()
+    .min(2, { message: "Zip code must be at least 2 characters." }),
 });
 
 export interface Session {
@@ -55,11 +91,16 @@ export interface CreateUser {
   password: string;
 }
 
-export interface User {
+export interface CommentUser {
   firstname: string;
   lastname: string;
   email: string;
   id: number;
+}
+
+export interface User {
+  id: number;
+  name: string;
 }
 
 export interface T_Product {
@@ -94,5 +135,6 @@ export interface T_ProductDetails {
 
 export interface T_Comment {
   comment: string;
-  user: User;
+  id: number;
+  user: CommentUser;
 }
