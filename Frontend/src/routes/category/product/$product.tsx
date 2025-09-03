@@ -1,8 +1,13 @@
 import Comments from "@/components/comments";
 import { Spinner } from "@/components/spinner";
+import { api } from "@/lib/api";
+import { useAuth } from "@/lib/utils";
+import { createCommentsQueryOptions } from "@/queryOptions/createCommentQueryOptions";
 import { createProductDetailsQueryOptions } from "@/queryOptions/createProductsQueryOptions.ts";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/category/product/$product")({
   component: RouteComponent,
@@ -19,7 +24,9 @@ export const Route = createFileRoute("/category/product/$product")({
 });
 
 function RouteComponent() {
+  const queryClient = useQueryClient();
   const { slug } = Route.useLoaderData();
+  const { loginData } = useAuth();
 
   const {
     data: item,
@@ -28,6 +35,31 @@ function RouteComponent() {
     error,
     refetch,
   } = useSuspenseQuery(createProductDetailsQueryOptions(slug));
+
+  const [commentText, setCommentText] = useState("");
+  const handleSendComment = async () => {
+    if (!loginData) {
+      toast.error("Need to Login", { id: "NeedLogin" });
+      return;
+    }
+    if (!commentText) {
+      toast.error("Comment cant be empty", { id: "notext" });
+      return;
+    }
+    await api.post(
+      "comments",
+      {
+        productId: item.id,
+        userId: loginData.user.id,
+        comment: commentText,
+      },
+      loginData?.accessToken
+    );
+    queryClient.invalidateQueries({
+      queryKey: createCommentsQueryOptions(item.id).queryKey,
+    });
+    setCommentText("");
+  };
 
   if (isError)
     return (
@@ -86,11 +118,14 @@ function RouteComponent() {
             name="kontakt"
             id="kontakt"
             placeholder="Skriv en besked til sælger....."
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
           ></textarea>
           <div className="flex justify-end mt-2">
             <button
               className="bg-app-primary hover:cursor-pointer text-white px-6 py-2 shadow hover:bg-green-700 transition-colors"
               type="button"
+              onClick={handleSendComment}
             >
               send
             </button>

@@ -13,11 +13,13 @@ export const getRecords = async (req: Request, res: Response) => {
       },
       select: {
         comment: true,
+        id: true,
         user: {
           select: {
             firstname: true,
             lastname: true,
             email: true,
+            id: true,
           },
         },
       },

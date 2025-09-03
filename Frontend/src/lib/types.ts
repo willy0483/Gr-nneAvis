@@ -94,5 +94,6 @@ export interface T_ProductDetails {
 
 export interface T_Comment {
   comment: string;
+  id: number;
   user: User;
 }
