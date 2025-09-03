@@ -55,11 +55,16 @@ export interface CreateUser {
   password: string;
 }
 
-export interface User {
+export interface CommentUser {
   firstname: string;
   lastname: string;
   email: string;
   id: number;
+}
+
+export interface User {
+  id: number;
+  name: string;
 }
 
 export interface T_Product {
@@ -95,5 +100,5 @@ export interface T_ProductDetails {
 export interface T_Comment {
   comment: string;
   id: number;
-  user: User;
+  user: CommentUser;
 }

@@ -44,8 +44,8 @@ export const SignUpForm = () => {
         <p className="text-sm text-red-500">{state.message}</p>
       )}
 
-      <div className="relative flex items-center gap-2 rounded-md border border-app-secondary px-3 py-2 focus-within:ring-2 focus-within:ring-app-primary">
-        <UserIcon className="h-5 w-5 text-app-secondary" />
+      <div className="relative flex items-center gap-2 rounded-md border border-app-primary/50 px-3 py-2 focus-within:ring-2 focus-within:ring-app-primary/50">
+        <UserIcon className="h-5 w-5 text-gray-600" />
         <input
           type="text"
           id="name"
@@ -62,8 +62,8 @@ export const SignUpForm = () => {
         <p className="text-sm text-red-500 text-center">{state.error.name}</p>
       )}
 
-      <div className="relative flex items-center gap-2 rounded-md border border-app-secondary px-3 py-2 focus-within:ring-2 focus-within:ring-indigo-500">
-        <MailIcon className="h-5 w-5 text-app-secondary" />
+      <div className="relative flex items-center gap-2 rounded-md border border-app-primary/50 px-3 py-2 focus-within:ring-2 focus-within:ring-app-primary/50">
+        <MailIcon className="h-5 w-5 text-gray-600" />
         <input
           type="email"
           id="email"
@@ -80,8 +80,8 @@ export const SignUpForm = () => {
         <p className="text-sm text-red-500 text-center">{state.error.email}</p>
       )}
 
-      <div className="relative flex items-center gap-2 rounded-md border border-app-secondary px-3 py-2 focus-within:ring-2 focus-within:ring-app-primary">
-        <LockIcon className="h-5 w-5 text-app-secondary" />
+      <div className="relative flex items-center gap-2 rounded-md border border-app-primary/50 px-3 py-2 focus-within:ring-2 focus-within:ring-app-primary/50">
+        <LockIcon className="h-5 w-5 text-gray-600" />
         <input
           type={showPassword ? "text" : "password"}
           placeholder="Password"
@@ -97,7 +97,7 @@ export const SignUpForm = () => {
           aria-label="Toggle password visibility"
           type="button"
           onClick={togglePasswordVisibility}
-          className="text-app-secondary hover:text-app-text"
+          className="text-gray-600 hover:text-app-text"
         >
           {showPassword ? (
             <EyeOffIcon className="h-5 w-5" />
@@ -115,7 +115,7 @@ export const SignUpForm = () => {
       <SubmitButton>Sign Up</SubmitButton>
 
       <div className="flex justify-center text-sm gap-1">
-        <p className="text-app-secondary">Already have an account?</p>
+        <p className="text-gray-600">Har du allerede en konto? </p>
         <a
           className="font-medium text-app-primary hover:underline"
           href="/login"
