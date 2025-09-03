@@ -1,5 +1,11 @@
 import { BACKEND_URL } from "./constants";
-import { LoginFormSchema, SignupFormSchema, type FormState } from "./types";
+import {
+  AnnonceFormSchema,
+  LoginFormSchema,
+  SignupFormSchema,
+  type AnnonceFormState,
+  type FormState,
+} from "./types";
 
 export const login = async (
   _state: FormState,
@@ -58,8 +64,6 @@ export const signup = async (
     zipcode: formData.get("zipcode"),
   });
 
-  console.log(validatedFields);
-
   if (!validatedFields.success) {
     const fieldErrors = validatedFields.error.flatten().fieldErrors;
     return {
@@ -97,6 +101,60 @@ export const signup = async (
         response.status === 500
           ? "The user already existed!"
           : response.statusText,
+    };
+  }
+};
+
+export const annonce = async (
+  _state: AnnonceFormState,
+  formData: FormData,
+  accessToken?: string
+) => {
+  const validatedFields = AnnonceFormSchema.safeParse({
+    title: formData.get("title"),
+    category: Number(formData.get("category")),
+    text: formData.get("text"),
+    url: formData.get("url"),
+    price: Number(formData.get("price")),
+  });
+
+  console.log(validatedFields);
+
+  if (!validatedFields.success) {
+    const fieldErrors = validatedFields.error.flatten().fieldErrors;
+    return {
+      error: {
+        title: fieldErrors.title,
+        category: fieldErrors.category,
+        text: fieldErrors.text,
+        url: fieldErrors.url,
+        price: fieldErrors.price,
+      },
+    };
+  }
+
+  const response = await fetch(`${BACKEND_URL}/products`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      name: validatedFields.data.title,
+      image: validatedFields.data.url,
+      description: validatedFields.data.text,
+      price: validatedFields.data.price,
+      categoryId: validatedFields.data.category,
+    }),
+  });
+
+  console.log(response);
+
+  if (response.ok) {
+    return { success: true };
+  } else {
+    return {
+      message: response.statusText,
     };
   }
 };

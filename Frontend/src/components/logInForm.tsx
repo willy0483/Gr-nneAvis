@@ -32,18 +32,11 @@ export const LoginForm = () => {
     setShowPassword(!showPassword);
   };
 
-  const errorMessage =
-    state?.message || state?.error?.email || state?.error?.password;
-
   return (
     <form
       action={action}
       className="w-full h-100 flex flex-col justify-center max-w-xs space-y-4 text-black"
     >
-      {errorMessage && (
-        <p className="text-sm text-red-500 text-center">{errorMessage}</p>
-      )}
-
       <div className="relative flex items-center gap-2 rounded-md border border-app-primary/50 px-3 py-2 focus-within:ring-2 focus-within:ring-app-primary/50">
         <MailIcon className="h-5 w-5 text-gray-600" />
         <input
@@ -58,6 +51,10 @@ export const LoginForm = () => {
           required
         />
       </div>
+
+      {state?.error?.email && (
+        <p className="text-sm text-red-500 text-center">{state.error.email}</p>
+      )}
 
       <div className="relative flex items-center gap-2 rounded-md border  border-app-primary/50 px-3 py-2 focus-within:ring-2 focus-within:ring-app-primary/50">
         <LockIcon className="h-5 w-5 text-gray-600" />
@@ -84,6 +81,12 @@ export const LoginForm = () => {
             <EyeIcon className="h-5 w-5" />
           )}
         </button>
+
+        {state?.error?.password && (
+          <p className="text-sm text-red-500 text-center">
+            {state.error.password}
+          </p>
+        )}
       </div>
 
       <SubmitButton>Login In</SubmitButton>

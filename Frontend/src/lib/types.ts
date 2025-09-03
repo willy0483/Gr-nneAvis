@@ -1,5 +1,29 @@
 import z from "zod";
 
+export type AnnonceFormState =
+  | {
+      error?: {
+        title?: string[];
+        category?: string[];
+        text?: string[];
+        url?: string[];
+        price?: string[];
+      };
+      message?: string;
+      success?: boolean;
+    }
+  | undefined;
+
+export const AnnonceFormSchema = z.object({
+  title: z.string().min(2, { message: "Title must be at least 2 characters." }),
+  category: z
+    .number()
+    .min(1, { message: "Category must be at least 1 selecte." }),
+  text: z.string().min(2, { message: "Text must be at least 2 characters." }),
+  url: z.string().url({ message: "Must be a valid URL." }),
+  price: z.number().min(0, { message: "Price must be a positive number." }),
+});
+
 export type FormState =
   | {
       error?: {
