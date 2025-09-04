@@ -1,5 +1,55 @@
 import z from "zod";
 
+export type ProfileFormState =
+  | {
+      error?: {
+        email?: string[];
+        password?: string[];
+        firstname?: string[];
+        lastname?: string[];
+        address?: string[];
+        city?: string[];
+        zipcode?: string[];
+        hasNewsletter?: string[];
+        hasNotification?: string[];
+      };
+      message?: string;
+      success?: boolean;
+    }
+  | undefined;
+
+export const ProfileFormSchema = z.object({
+  email: z.string().email({ message: "Please enter a valid email." }).trim(),
+  password: z
+    .string()
+    .min(8, { message: "Be at least 8 characters long." })
+    .regex(/[a-zA-Z]/, {
+      message: " Contain at least one letter.",
+    })
+    .regex(/[0-9]/, {
+      message: " Contain at least one number.",
+    })
+    .regex(/[^a-zA-Z0-9]/, {
+      message: " Contain at least one special character.",
+    })
+    .trim(),
+  firstname: z
+    .string()
+    .min(2, { message: "First name must be at least 2 characters." }),
+  lastname: z
+    .string()
+    .min(2, { message: "Last name must be at least 2 characters." }),
+  address: z
+    .string()
+    .min(2, { message: "Address must be at least 2 characters." }),
+  city: z.string().min(2, { message: "City must be at least 2 characters." }),
+  zipcode: z
+    .number()
+    .min(2, { message: "Zip code must be at least 2 characters." }),
+  hasNewsletter: z.boolean().default(false),
+  hasNotification: z.boolean().default(false),
+});
+
 export type AnnonceFormState =
   | {
       error?: {
