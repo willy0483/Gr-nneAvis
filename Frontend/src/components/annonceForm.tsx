@@ -12,11 +12,12 @@ import {
   SelectValue,
   SelectItem,
 } from "./ui/select";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { createCategoriesQueryOptions } from "@/queryOptions/createCategoryQueryOptions";
 import SubmitButton from "./submitButton";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
+import { createAnnoncerByUserQueryOption } from "@/queryOptions/createAnnoncerByUserQueryOption";
 
 const AnnonceForm = () => {
   const { loginData } = useAuth();
@@ -35,18 +36,25 @@ const AnnonceForm = () => {
     createCategoriesQueryOptions()
   );
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (state?.success) {
       toast.success(`Annonce ${loginData?.user.name} was create!`, {
         id: "login-success",
       });
+
+      queryClient.invalidateQueries({
+        queryKey: createAnnoncerByUserQueryOption(loginData?.user.id || 0)
+          .queryKey,
+      });
+
       navigate({
         to: "/category/product/$product",
         params: { product: title.toLocaleUpperCase() },
       });
     }
-  }, [state?.success, navigate, loginData, title]);
+  }, [state?.success, navigate, loginData, title, queryClient]);
 
   return (
     <form

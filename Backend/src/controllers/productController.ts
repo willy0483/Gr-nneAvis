@@ -122,3 +122,24 @@ export const deleteRecord = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Failed to delete product" });
   }
 };
+
+export const getRecordsByUser = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  try {
+    const data = await prisma.product.findMany({
+      where: { userId: Number(userId) },
+      select: {
+        id: true,
+        name: true,
+        slug: true,
+        image: true,
+        price: true,
+        description: true,
+      },
+    });
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch user products" });
+  }
+};

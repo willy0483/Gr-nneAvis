@@ -188,3 +188,12 @@ export interface T_Comment {
   id: number;
   user: CommentUser;
 }
+
+export interface T_Annoncer {
+  id: number;
+  name: string;
+  slug: string;
+  image: string;
+  price: string;
+  description: string;
+}
