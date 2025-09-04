@@ -8,8 +8,9 @@ import {
   SelectValue,
 } from "./ui/select";
 import { createCategoriesQueryOptions } from "@/queryOptions/createCategoryQueryOptions";
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useAuth } from "@/lib/utils";
+import { AlertOctagon, Mail, UserCircle } from "lucide-react";
 
 const Nav = () => {
   const { data } = useSuspenseQuery(createCategoriesQueryOptions());
@@ -56,6 +57,21 @@ const Nav = () => {
       >
         Opret annonce
       </button>
+
+      {loginData && (
+        <div className="flex gap-5">
+          <Link to="/">
+            <Mail className="text-gray-500 w-8 h-8" />
+          </Link>
+          <Link to="/">
+            <AlertOctagon className="text-gray-500 w-8 h-8" />
+          </Link>
+
+          <Link to="/konto/profile">
+            <UserCircle className="text-gray-500 w-8 h-8" />
+          </Link>
+        </div>
+      )}
     </nav>
   );
 };

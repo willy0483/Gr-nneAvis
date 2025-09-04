@@ -2,9 +2,11 @@ import { BACKEND_URL } from "./constants";
 import {
   AnnonceFormSchema,
   LoginFormSchema,
+  ProfileFormSchema,
   SignupFormSchema,
   type AnnonceFormState,
   type FormState,
+  type ProfileFormState,
 } from "./types";
 
 export const login = async (
@@ -145,6 +147,63 @@ export const annonce = async (
       description: validatedFields.data.text,
       price: validatedFields.data.price,
       categoryId: validatedFields.data.category,
+    }),
+  });
+
+  console.log(response);
+
+  if (response.ok) {
+    return { success: true };
+  } else {
+    return {
+      message: response.statusText,
+    };
+  }
+};
+
+export const profile = async (
+  _state: ProfileFormState,
+  formData: FormData,
+  id: number
+) => {
+  const validatedFields = ProfileFormSchema.safeParse({
+    email: formData.get("email"),
+    password: formData.get("password") ?? "",
+    firstname: formData.get("firstname"),
+    lastname: formData.get("lastname"),
+    address: formData.get("address"),
+    city: formData.get("city"),
+    zipcode: Number(formData.get("zipcode")),
+    hasNewsletter: formData.get("hasNewsletter") == "on" ? true : false,
+    hasNotification: formData.get("hasNotification") == "on" ? true : false,
+  });
+
+  console.log(validatedFields);
+
+  if (!validatedFields.success) {
+    const fieldErrors = validatedFields.error.flatten().fieldErrors;
+    return {
+      error: {
+        email: fieldErrors.email,
+        password: fieldErrors.password,
+        firstname: fieldErrors.firstname,
+        lastname: fieldErrors.lastname,
+        address: fieldErrors.address,
+        city: fieldErrors.city,
+        zipcode: fieldErrors.zipcode,
+        hasNewsletter: fieldErrors.hasNewsletter,
+        hasNotification: fieldErrors.hasNotification,
+      },
+    };
+  }
+
+  const response = await fetch(`${BACKEND_URL}/users/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ...validatedFields.data,
     }),
   });
 

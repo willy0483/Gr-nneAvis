@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as KontoRouteRouteImport } from './routes/konto/route'
 import { Route as CategoryRouteRouteImport } from './routes/category/route'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -17,10 +18,17 @@ import { Route as CategoryIndexRouteImport } from './routes/category/index'
 import { Route as AnnonceIndexRouteImport } from './routes/annonce/index'
 import { Route as ProductsProductRouteImport } from './routes/products/$product'
 import { Route as CategoryCategoryRouteImport } from './routes/category/$category'
+import { Route as KontoProfileIndexRouteImport } from './routes/konto/profile/index'
+import { Route as KontoAnnoncerIndexRouteImport } from './routes/konto/annoncer/index'
 import { Route as authSignupIndexRouteImport } from './routes/(auth)/signup/index'
 import { Route as authLoginIndexRouteImport } from './routes/(auth)/login/index'
 import { Route as CategoryProductProductRouteImport } from './routes/category/product/$product'
 
+const KontoRouteRoute = KontoRouteRouteImport.update({
+  id: '/konto',
+  path: '/konto',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CategoryRouteRoute = CategoryRouteRouteImport.update({
   id: '/category',
   path: '/category',
@@ -60,6 +68,16 @@ const CategoryCategoryRoute = CategoryCategoryRouteImport.update({
   path: '/$category',
   getParentRoute: () => CategoryRouteRoute,
 } as any)
+const KontoProfileIndexRoute = KontoProfileIndexRouteImport.update({
+  id: '/profile/',
+  path: '/profile/',
+  getParentRoute: () => KontoRouteRoute,
+} as any)
+const KontoAnnoncerIndexRoute = KontoAnnoncerIndexRouteImport.update({
+  id: '/annoncer/',
+  path: '/annoncer/',
+  getParentRoute: () => KontoRouteRoute,
+} as any)
 const authSignupIndexRoute = authSignupIndexRouteImport.update({
   id: '/signup/',
   path: '/signup/',
@@ -79,6 +97,7 @@ const CategoryProductProductRoute = CategoryProductProductRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof authRouteRouteWithChildren
   '/category': typeof CategoryRouteRouteWithChildren
+  '/konto': typeof KontoRouteRouteWithChildren
   '/category/$category': typeof CategoryCategoryRoute
   '/products/$product': typeof ProductsProductRoute
   '/annonce': typeof AnnonceIndexRoute
@@ -87,9 +106,12 @@ export interface FileRoutesByFullPath {
   '/category/product/$product': typeof CategoryProductProductRoute
   '/login': typeof authLoginIndexRoute
   '/signup': typeof authSignupIndexRoute
+  '/konto/annoncer': typeof KontoAnnoncerIndexRoute
+  '/konto/profile': typeof KontoProfileIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof authRouteRouteWithChildren
+  '/konto': typeof KontoRouteRouteWithChildren
   '/category/$category': typeof CategoryCategoryRoute
   '/products/$product': typeof ProductsProductRoute
   '/annonce': typeof AnnonceIndexRoute
@@ -98,12 +120,15 @@ export interface FileRoutesByTo {
   '/category/product/$product': typeof CategoryProductProductRoute
   '/login': typeof authLoginIndexRoute
   '/signup': typeof authSignupIndexRoute
+  '/konto/annoncer': typeof KontoAnnoncerIndexRoute
+  '/konto/profile': typeof KontoProfileIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/(auth)': typeof authRouteRouteWithChildren
   '/category': typeof CategoryRouteRouteWithChildren
+  '/konto': typeof KontoRouteRouteWithChildren
   '/category/$category': typeof CategoryCategoryRoute
   '/products/$product': typeof ProductsProductRoute
   '/annonce/': typeof AnnonceIndexRoute
@@ -112,12 +137,15 @@ export interface FileRoutesById {
   '/category/product/$product': typeof CategoryProductProductRoute
   '/(auth)/login/': typeof authLoginIndexRoute
   '/(auth)/signup/': typeof authSignupIndexRoute
+  '/konto/annoncer/': typeof KontoAnnoncerIndexRoute
+  '/konto/profile/': typeof KontoProfileIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/category'
+    | '/konto'
     | '/category/$category'
     | '/products/$product'
     | '/annonce'
@@ -126,9 +154,12 @@ export interface FileRouteTypes {
     | '/category/product/$product'
     | '/login'
     | '/signup'
+    | '/konto/annoncer'
+    | '/konto/profile'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/konto'
     | '/category/$category'
     | '/products/$product'
     | '/annonce'
@@ -137,11 +168,14 @@ export interface FileRouteTypes {
     | '/category/product/$product'
     | '/login'
     | '/signup'
+    | '/konto/annoncer'
+    | '/konto/profile'
   id:
     | '__root__'
     | '/'
     | '/(auth)'
     | '/category'
+    | '/konto'
     | '/category/$category'
     | '/products/$product'
     | '/annonce/'
@@ -150,12 +184,15 @@ export interface FileRouteTypes {
     | '/category/product/$product'
     | '/(auth)/login/'
     | '/(auth)/signup/'
+    | '/konto/annoncer/'
+    | '/konto/profile/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   authRouteRoute: typeof authRouteRouteWithChildren
   CategoryRouteRoute: typeof CategoryRouteRouteWithChildren
+  KontoRouteRoute: typeof KontoRouteRouteWithChildren
   ProductsProductRoute: typeof ProductsProductRoute
   AnnonceIndexRoute: typeof AnnonceIndexRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
@@ -163,6 +200,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/konto': {
+      id: '/konto'
+      path: '/konto'
+      fullPath: '/konto'
+      preLoaderRoute: typeof KontoRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/category': {
       id: '/category'
       path: '/category'
@@ -219,6 +263,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CategoryCategoryRouteImport
       parentRoute: typeof CategoryRouteRoute
     }
+    '/konto/profile/': {
+      id: '/konto/profile/'
+      path: '/profile'
+      fullPath: '/konto/profile'
+      preLoaderRoute: typeof KontoProfileIndexRouteImport
+      parentRoute: typeof KontoRouteRoute
+    }
+    '/konto/annoncer/': {
+      id: '/konto/annoncer/'
+      path: '/annoncer'
+      fullPath: '/konto/annoncer'
+      preLoaderRoute: typeof KontoAnnoncerIndexRouteImport
+      parentRoute: typeof KontoRouteRoute
+    }
     '/(auth)/signup/': {
       id: '/(auth)/signup/'
       path: '/signup'
@@ -273,10 +331,25 @@ const CategoryRouteRouteWithChildren = CategoryRouteRoute._addFileChildren(
   CategoryRouteRouteChildren,
 )
 
+interface KontoRouteRouteChildren {
+  KontoAnnoncerIndexRoute: typeof KontoAnnoncerIndexRoute
+  KontoProfileIndexRoute: typeof KontoProfileIndexRoute
+}
+
+const KontoRouteRouteChildren: KontoRouteRouteChildren = {
+  KontoAnnoncerIndexRoute: KontoAnnoncerIndexRoute,
+  KontoProfileIndexRoute: KontoProfileIndexRoute,
+}
+
+const KontoRouteRouteWithChildren = KontoRouteRoute._addFileChildren(
+  KontoRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   authRouteRoute: authRouteRouteWithChildren,
   CategoryRouteRoute: CategoryRouteRouteWithChildren,
+  KontoRouteRoute: KontoRouteRouteWithChildren,
   ProductsProductRoute: ProductsProductRoute,
   AnnonceIndexRoute: AnnonceIndexRoute,
   ProductsIndexRoute: ProductsIndexRoute,
