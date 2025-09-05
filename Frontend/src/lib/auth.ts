@@ -120,8 +120,6 @@ export const annonce = async (
     price: Number(formData.get("price")),
   });
 
-  console.log(validatedFields);
-
   if (!validatedFields.success) {
     const fieldErrors = validatedFields.error.flatten().fieldErrors;
     return {
@@ -150,8 +148,6 @@ export const annonce = async (
     }),
   });
 
-  console.log(response);
-
   if (response.ok) {
     return { success: true };
   } else {
@@ -177,8 +173,6 @@ export const profile = async (
     hasNewsletter: formData.get("hasNewsletter") == "on" ? true : false,
     hasNotification: formData.get("hasNotification") == "on" ? true : false,
   });
-
-  console.log(validatedFields);
 
   if (!validatedFields.success) {
     const fieldErrors = validatedFields.error.flatten().fieldErrors;
@@ -206,8 +200,6 @@ export const profile = async (
       ...validatedFields.data,
     }),
   });
-
-  console.log(response);
 
   if (response.ok) {
     return { success: true };

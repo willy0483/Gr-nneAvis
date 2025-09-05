@@ -4,6 +4,21 @@ import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/annonce/")({
   component: RouteComponent,
+  head: () => ({
+    meta: [
+      { title: "Opret annonce - Den Grønne Avis" },
+      {
+        name: "description",
+        content:
+          "Opret en ny annonce på Den Grønne Avis. Sælg dine brugte varer og støt klimaet!",
+      },
+      {
+        name: "keywords",
+        content:
+          "opret annonce, sælg, Den Grønne Avis, genbrug, handel, miljø, brugte varer",
+      },
+    ],
+  }),
 });
 
 function RouteComponent() {

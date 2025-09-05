@@ -9,12 +9,17 @@ export const Route = createFileRoute("/(auth)/login/")({
   head: () => ({
     meta: [
       {
-        title: "Login | My Template",
+        title: "Login - Den Grønne Avis",
       },
       {
         name: "description",
         content:
-          "Login to access your account and explore the features of My Template.",
+          "Log ind på din konto hos Den Grønne Avis og få adgang til dine annoncer, profil og meget mere. Støt klimaet med genbrug!",
+      },
+      {
+        name: "keywords",
+        content:
+          "login, log ind, Den Grønne Avis, genbrug, handel, miljø, bruger, annoncer",
       },
     ],
   }),
