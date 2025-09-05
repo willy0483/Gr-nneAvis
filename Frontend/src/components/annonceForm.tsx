@@ -18,6 +18,7 @@ import SubmitButton from "./submitButton";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { createAnnoncerByUserQueryOption } from "@/queryOptions/createAnnoncerByUserQueryOption";
+import { createCategoryProductsQueryOptions } from "@/queryOptions/createProductsQueryOptions.ts";
 
 const AnnonceForm = () => {
   const { loginData } = useAuth();
@@ -31,6 +32,7 @@ const AnnonceForm = () => {
   const [text, setText] = useState("");
   const [url, setUrl] = useState("");
   const [price, setPrice] = useState(0);
+  const [category, setCategory] = useState<string>();
 
   const { data: categoryList } = useSuspenseQuery(
     createCategoriesQueryOptions()
@@ -49,12 +51,16 @@ const AnnonceForm = () => {
           .queryKey,
       });
 
+      queryClient.invalidateQueries({
+        queryKey: createCategoryProductsQueryOptions(category ?? "").queryKey,
+      });
+
       navigate({
         to: "/category/product/$product",
         params: { product: title.toLocaleUpperCase() },
       });
     }
-  }, [state?.success, navigate, loginData, title, queryClient]);
+  }, [state?.success, navigate, loginData, title, queryClient, category]);
 
   return (
     <form
@@ -87,7 +93,7 @@ const AnnonceForm = () => {
       <div>
         <label htmlFor="title">Kategori</label>
         <div className="relative flex items-center gap-2">
-          <Select name="category">
+          <Select name="category" onValueChange={setCategory}>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Hvilken kategori tilhører dit produkt..." />
             </SelectTrigger>

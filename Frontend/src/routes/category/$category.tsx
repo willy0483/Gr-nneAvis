@@ -18,6 +18,19 @@ export const Route = createFileRoute("/category/$category")({
       <Spinner />
     </div>
   ),
+  head: ({ params }) => ({
+    meta: [
+      { title: `${params.category} - Den Grønne Avis` },
+      {
+        name: "description",
+        content: `Se alle produkter i kategorien ${params.category} på Den Grønne Avis. Find brugte varer og støt klimaet!`,
+      },
+      {
+        name: "keywords",
+        content: `kategori, produkter, Den Grønne Avis, genbrug, handel, miljø, ${params.category}`,
+      },
+    ],
+  }),
 });
 
 function RouteComponent() {

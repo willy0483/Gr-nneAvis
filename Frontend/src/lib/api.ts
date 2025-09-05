@@ -32,7 +32,6 @@ export const api = {
       body: JSON.stringify(body),
     });
     const data = await res.json();
-    console.log(data);
 
     return data;
   },

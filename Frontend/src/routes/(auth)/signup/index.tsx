@@ -7,12 +7,17 @@ export const Route = createFileRoute("/(auth)/signup/")({
   head: () => ({
     meta: [
       {
-        title: "SignUp | My Template",
+        title: "Opret konto - Den Grønne Avis",
       },
       {
         name: "description",
         content:
-          "Create a new account to get started and unlock all the features of My Template. Join our community today!",
+          "Opret en konto på Den Grønne Avis og bliv en del af fællesskabet. Køb og sælg brugte varer og støt klimaet!",
+      },
+      {
+        name: "keywords",
+        content:
+          "opret konto, signup, Den Grønne Avis, genbrug, handel, miljø, bruger, fællesskab",
       },
     ],
   }),
