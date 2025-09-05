@@ -36,6 +36,10 @@ export const LoginForm = () => {
       action={action}
       className="w-full h-100 flex flex-col justify-center max-w-xs space-y-4 text-black"
     >
+      {state?.message && (
+        <p className="text-sm text-red-500 text-center">{state.message}</p>
+      )}
+
       <div className="relative flex items-center gap-2 rounded-md border border-app-primary/50 px-3 py-2 focus-within:ring-2 focus-within:ring-app-primary/50">
         <MailIcon className="h-5 w-5 text-gray-600" />
         <input
