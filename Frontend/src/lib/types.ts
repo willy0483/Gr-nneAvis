@@ -1,9 +1,88 @@
 import z from "zod";
 
+export type ProfileFormState =
+  | {
+      error?: {
+        email?: string[];
+        password?: string[];
+        firstname?: string[];
+        lastname?: string[];
+        address?: string[];
+        city?: string[];
+        zipcode?: string[];
+        hasNewsletter?: string[];
+        hasNotification?: string[];
+      };
+      message?: string;
+      success?: boolean;
+    }
+  | undefined;
+
+export const ProfileFormSchema = z.object({
+  email: z.string().email({ message: "Please enter a valid email." }).trim(),
+  password: z
+    .string()
+    .min(8, { message: "Be at least 8 characters long." })
+    .regex(/[a-zA-Z]/, {
+      message: " Contain at least one letter.",
+    })
+    .regex(/[0-9]/, {
+      message: " Contain at least one number.",
+    })
+    .regex(/[^a-zA-Z0-9]/, {
+      message: " Contain at least one special character.",
+    })
+    .trim(),
+  firstname: z
+    .string()
+    .min(2, { message: "First name must be at least 2 characters." }),
+  lastname: z
+    .string()
+    .min(2, { message: "Last name must be at least 2 characters." }),
+  address: z
+    .string()
+    .min(2, { message: "Address must be at least 2 characters." }),
+  city: z.string().min(2, { message: "City must be at least 2 characters." }),
+  zipcode: z
+    .number()
+    .min(2, { message: "Zip code must be at least 2 characters." }),
+  hasNewsletter: z.boolean().default(false),
+  hasNotification: z.boolean().default(false),
+});
+
+export type AnnonceFormState =
+  | {
+      error?: {
+        title?: string[];
+        category?: string[];
+        text?: string[];
+        url?: string[];
+        price?: string[];
+      };
+      message?: string;
+      success?: boolean;
+    }
+  | undefined;
+
+export const AnnonceFormSchema = z.object({
+  title: z.string().min(2, { message: "Title must be at least 2 characters." }),
+  category: z
+    .number()
+    .min(1, { message: "Category must be at least 1 selecte." }),
+  text: z.string().min(2, { message: "Text must be at least 2 characters." }),
+  url: z.string().url({ message: "Must be a valid URL." }),
+  price: z.number().min(0, { message: "Price must be a positive number." }),
+});
+
 export type FormState =
   | {
       error?: {
         name?: string[];
+        firstname?: string[];
+        lastname?: string[];
+        address?: string[];
+        city?: string[];
+        zipcode?: string[];
         email?: string[];
         password?: string[];
       };
@@ -21,12 +100,6 @@ export const LoginFormSchema = z.object({
 });
 
 export const SignupFormSchema = z.object({
-  name: z
-    .string()
-    .min(2, {
-      message: "Name must be at least 2 characters long.",
-    })
-    .trim(),
   email: z.string().email({ message: "Please enter a valid email." }).trim(),
   password: z
     .string()
@@ -41,6 +114,19 @@ export const SignupFormSchema = z.object({
       message: " Contain at least one special character.",
     })
     .trim(),
+  firstname: z
+    .string()
+    .min(2, { message: "First name must be at least 2 characters." }),
+  lastname: z
+    .string()
+    .min(2, { message: "Last name must be at least 2 characters." }),
+  address: z
+    .string()
+    .min(2, { message: "Address must be at least 2 characters." }),
+  city: z.string().min(2, { message: "City must be at least 2 characters." }),
+  zipcode: z
+    .string()
+    .min(2, { message: "Zip code must be at least 2 characters." }),
 });
 
 export interface Session {
@@ -53,7 +139,13 @@ export interface CreateUser {
   name: string;
   email: string;
   password: string;
-  image: string;
+}
+
+export interface CommentUser {
+  firstname: string;
+  lastname: string;
+  email: string;
+  id: number;
 }
 
 export interface User {
@@ -63,55 +155,45 @@ export interface User {
 
 export interface T_Product {
   id: number;
-  title: string;
+  name: string;
   slug: string;
+  image: string;
+  price: string;
   description: string;
-  imageUrl: string;
-  procedure: string;
-  durationInMinutes: number;
-  amount: number;
-  price: number;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-  favorites: T_Favorite[];
-  numFavorites: number;
 }
 
-export interface T_Favorite {
-  userId: number;
+export interface T_Category {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface T_Donations {
+  theme: string;
 }
 
 export interface T_ProductDetails {
   id: number;
-  title: string;
-  slug: string;
+  name: string;
+  image: string;
   description: string;
-  imageUrl: string;
-  procedure: string;
-  durationInMinutes: number;
-  amount: number;
-  price: number;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-  productIngredients: ProductIngredient[];
-}
-export interface ProductIngredient {
-  id: number;
-  productId: number;
-  ingredientId: number;
-  unitId: number;
-  amount: number;
-  orderNum: number;
-  ingredients: Ingredients;
-  units: Units;
-}
-export interface Ingredients {
-  title: string;
+  price: string;
+  slug: string;
+  categoryId: number;
+  userId: number;
 }
 
-export interface Units {
+export interface T_Comment {
+  comment: string;
+  id: number;
+  user: CommentUser;
+}
+
+export interface T_Annoncer {
+  id: number;
   name: string;
-  abbreviation: string;
+  slug: string;
+  image: string;
+  price: string;
+  description: string;
 }

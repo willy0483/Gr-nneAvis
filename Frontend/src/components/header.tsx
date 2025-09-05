@@ -15,16 +15,21 @@ const Header = () => {
   };
 
   return (
-    <header className=" h-[80px] px-4 sm:px-0 container mx-auto bg-app-surface text-app-text flex items-center justify-between">
+    <header className=" h-[80px] px-4 sm:px-0 container mx-auto flex items-center justify-between">
       {/* logo */}
       <Link to={"/"}>
-        <h1 className="text-4xl font-semibold">
-          Website<span className="text-app-accent">.</span>
+        <h1 className="text-4xl font-bold flex items-center border-2 border-app-primary overflow-hidden shadow-sm">
+          <span className="bg-app-primary text-white px-3 py-1 text-3xl ">
+            Den Grønne
+          </span>
+          <span className="bg-white text-app-primary px-3 py-1 text-3xl border-l-2 border-app-primary">
+            Avis
+          </span>
         </h1>
       </Link>
 
       {/* desktop nav */}
-      <div className="hidden md:flex items-center gap-8">
+      <div className="hidden xl:flex items-center gap-8">
         <Nav />
 
         {!isLoggedIn ? (
@@ -56,7 +61,7 @@ const Header = () => {
       </div>
 
       {/* mobile nav */}
-      <div className="md:hidden">
+      <div className="xl:hidden">
         <MobileNav />
       </div>
     </header>

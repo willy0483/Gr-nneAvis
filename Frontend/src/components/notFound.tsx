@@ -6,7 +6,7 @@ const NotFound = () => {
 
   return (
     <div
-      style={{ height: "calc(100vh - 80px)" }}
+      style={{ height: "calc(100vh - 160px)" }}
       className="flex flex-col items-center justify-center p-8 mx-auto max-w-md gap-4"
     >
       <svg

@@ -9,13 +9,29 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as KontoRouteRouteImport } from './routes/konto/route'
+import { Route as CategoryRouteRouteImport } from './routes/category/route'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ProductsIndexRouteImport } from './routes/products/index'
-import { Route as ProductsProductRouteImport } from './routes/products/$product'
+import { Route as CategoryIndexRouteImport } from './routes/category/index'
+import { Route as AnnonceIndexRouteImport } from './routes/annonce/index'
+import { Route as CategoryCategoryRouteImport } from './routes/category/$category'
+import { Route as KontoProfileIndexRouteImport } from './routes/konto/profile/index'
+import { Route as KontoAnnoncerIndexRouteImport } from './routes/konto/annoncer/index'
 import { Route as authSignupIndexRouteImport } from './routes/(auth)/signup/index'
 import { Route as authLoginIndexRouteImport } from './routes/(auth)/login/index'
+import { Route as CategoryProductProductRouteImport } from './routes/category/product/$product'
 
+const KontoRouteRoute = KontoRouteRouteImport.update({
+  id: '/konto',
+  path: '/konto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoryRouteRoute = CategoryRouteRouteImport.update({
+  id: '/category',
+  path: '/category',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const authRouteRoute = authRouteRouteImport.update({
   id: '/(auth)',
   getParentRoute: () => rootRouteImport,
@@ -25,15 +41,30 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProductsIndexRoute = ProductsIndexRouteImport.update({
-  id: '/products/',
-  path: '/products/',
+const CategoryIndexRoute = CategoryIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CategoryRouteRoute,
+} as any)
+const AnnonceIndexRoute = AnnonceIndexRouteImport.update({
+  id: '/annonce/',
+  path: '/annonce/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProductsProductRoute = ProductsProductRouteImport.update({
-  id: '/products/$product',
-  path: '/products/$product',
-  getParentRoute: () => rootRouteImport,
+const CategoryCategoryRoute = CategoryCategoryRouteImport.update({
+  id: '/$category',
+  path: '/$category',
+  getParentRoute: () => CategoryRouteRoute,
+} as any)
+const KontoProfileIndexRoute = KontoProfileIndexRouteImport.update({
+  id: '/profile/',
+  path: '/profile/',
+  getParentRoute: () => KontoRouteRoute,
+} as any)
+const KontoAnnoncerIndexRoute = KontoAnnoncerIndexRouteImport.update({
+  id: '/annoncer/',
+  path: '/annoncer/',
+  getParentRoute: () => KontoRouteRoute,
 } as any)
 const authSignupIndexRoute = authSignupIndexRouteImport.update({
   id: '/signup/',
@@ -45,54 +76,118 @@ const authLoginIndexRoute = authLoginIndexRouteImport.update({
   path: '/login/',
   getParentRoute: () => authRouteRoute,
 } as any)
+const CategoryProductProductRoute = CategoryProductProductRouteImport.update({
+  id: '/product/$product',
+  path: '/product/$product',
+  getParentRoute: () => CategoryRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof authRouteRouteWithChildren
-  '/products/$product': typeof ProductsProductRoute
-  '/products': typeof ProductsIndexRoute
+  '/category': typeof CategoryRouteRouteWithChildren
+  '/konto': typeof KontoRouteRouteWithChildren
+  '/category/$category': typeof CategoryCategoryRoute
+  '/annonce': typeof AnnonceIndexRoute
+  '/category/': typeof CategoryIndexRoute
+  '/category/product/$product': typeof CategoryProductProductRoute
   '/login': typeof authLoginIndexRoute
   '/signup': typeof authSignupIndexRoute
+  '/konto/annoncer': typeof KontoAnnoncerIndexRoute
+  '/konto/profile': typeof KontoProfileIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof authRouteRouteWithChildren
-  '/products/$product': typeof ProductsProductRoute
-  '/products': typeof ProductsIndexRoute
+  '/konto': typeof KontoRouteRouteWithChildren
+  '/category/$category': typeof CategoryCategoryRoute
+  '/annonce': typeof AnnonceIndexRoute
+  '/category': typeof CategoryIndexRoute
+  '/category/product/$product': typeof CategoryProductProductRoute
   '/login': typeof authLoginIndexRoute
   '/signup': typeof authSignupIndexRoute
+  '/konto/annoncer': typeof KontoAnnoncerIndexRoute
+  '/konto/profile': typeof KontoProfileIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/(auth)': typeof authRouteRouteWithChildren
-  '/products/$product': typeof ProductsProductRoute
-  '/products/': typeof ProductsIndexRoute
+  '/category': typeof CategoryRouteRouteWithChildren
+  '/konto': typeof KontoRouteRouteWithChildren
+  '/category/$category': typeof CategoryCategoryRoute
+  '/annonce/': typeof AnnonceIndexRoute
+  '/category/': typeof CategoryIndexRoute
+  '/category/product/$product': typeof CategoryProductProductRoute
   '/(auth)/login/': typeof authLoginIndexRoute
   '/(auth)/signup/': typeof authSignupIndexRoute
+  '/konto/annoncer/': typeof KontoAnnoncerIndexRoute
+  '/konto/profile/': typeof KontoProfileIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/products/$product' | '/products' | '/login' | '/signup'
+  fullPaths:
+    | '/'
+    | '/category'
+    | '/konto'
+    | '/category/$category'
+    | '/annonce'
+    | '/category/'
+    | '/category/product/$product'
+    | '/login'
+    | '/signup'
+    | '/konto/annoncer'
+    | '/konto/profile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/products/$product' | '/products' | '/login' | '/signup'
+  to:
+    | '/'
+    | '/konto'
+    | '/category/$category'
+    | '/annonce'
+    | '/category'
+    | '/category/product/$product'
+    | '/login'
+    | '/signup'
+    | '/konto/annoncer'
+    | '/konto/profile'
   id:
     | '__root__'
     | '/'
     | '/(auth)'
-    | '/products/$product'
-    | '/products/'
+    | '/category'
+    | '/konto'
+    | '/category/$category'
+    | '/annonce/'
+    | '/category/'
+    | '/category/product/$product'
     | '/(auth)/login/'
     | '/(auth)/signup/'
+    | '/konto/annoncer/'
+    | '/konto/profile/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   authRouteRoute: typeof authRouteRouteWithChildren
-  ProductsProductRoute: typeof ProductsProductRoute
-  ProductsIndexRoute: typeof ProductsIndexRoute
+  CategoryRouteRoute: typeof CategoryRouteRouteWithChildren
+  KontoRouteRoute: typeof KontoRouteRouteWithChildren
+  AnnonceIndexRoute: typeof AnnonceIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/konto': {
+      id: '/konto'
+      path: '/konto'
+      fullPath: '/konto'
+      preLoaderRoute: typeof KontoRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/category': {
+      id: '/category'
+      path: '/category'
+      fullPath: '/category'
+      preLoaderRoute: typeof CategoryRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(auth)': {
       id: '/(auth)'
       path: '/'
@@ -107,19 +202,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/products/': {
-      id: '/products/'
-      path: '/products'
-      fullPath: '/products'
-      preLoaderRoute: typeof ProductsIndexRouteImport
+    '/category/': {
+      id: '/category/'
+      path: '/'
+      fullPath: '/category/'
+      preLoaderRoute: typeof CategoryIndexRouteImport
+      parentRoute: typeof CategoryRouteRoute
+    }
+    '/annonce/': {
+      id: '/annonce/'
+      path: '/annonce'
+      fullPath: '/annonce'
+      preLoaderRoute: typeof AnnonceIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/products/$product': {
-      id: '/products/$product'
-      path: '/products/$product'
-      fullPath: '/products/$product'
-      preLoaderRoute: typeof ProductsProductRouteImport
-      parentRoute: typeof rootRouteImport
+    '/category/$category': {
+      id: '/category/$category'
+      path: '/$category'
+      fullPath: '/category/$category'
+      preLoaderRoute: typeof CategoryCategoryRouteImport
+      parentRoute: typeof CategoryRouteRoute
+    }
+    '/konto/profile/': {
+      id: '/konto/profile/'
+      path: '/profile'
+      fullPath: '/konto/profile'
+      preLoaderRoute: typeof KontoProfileIndexRouteImport
+      parentRoute: typeof KontoRouteRoute
+    }
+    '/konto/annoncer/': {
+      id: '/konto/annoncer/'
+      path: '/annoncer'
+      fullPath: '/konto/annoncer'
+      preLoaderRoute: typeof KontoAnnoncerIndexRouteImport
+      parentRoute: typeof KontoRouteRoute
     }
     '/(auth)/signup/': {
       id: '/(auth)/signup/'
@@ -134,6 +250,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/login'
       preLoaderRoute: typeof authLoginIndexRouteImport
       parentRoute: typeof authRouteRoute
+    }
+    '/category/product/$product': {
+      id: '/category/product/$product'
+      path: '/product/$product'
+      fullPath: '/category/product/$product'
+      preLoaderRoute: typeof CategoryProductProductRouteImport
+      parentRoute: typeof CategoryRouteRoute
     }
   }
 }
@@ -152,11 +275,42 @@ const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
   authRouteRouteChildren,
 )
 
+interface CategoryRouteRouteChildren {
+  CategoryCategoryRoute: typeof CategoryCategoryRoute
+  CategoryIndexRoute: typeof CategoryIndexRoute
+  CategoryProductProductRoute: typeof CategoryProductProductRoute
+}
+
+const CategoryRouteRouteChildren: CategoryRouteRouteChildren = {
+  CategoryCategoryRoute: CategoryCategoryRoute,
+  CategoryIndexRoute: CategoryIndexRoute,
+  CategoryProductProductRoute: CategoryProductProductRoute,
+}
+
+const CategoryRouteRouteWithChildren = CategoryRouteRoute._addFileChildren(
+  CategoryRouteRouteChildren,
+)
+
+interface KontoRouteRouteChildren {
+  KontoAnnoncerIndexRoute: typeof KontoAnnoncerIndexRoute
+  KontoProfileIndexRoute: typeof KontoProfileIndexRoute
+}
+
+const KontoRouteRouteChildren: KontoRouteRouteChildren = {
+  KontoAnnoncerIndexRoute: KontoAnnoncerIndexRoute,
+  KontoProfileIndexRoute: KontoProfileIndexRoute,
+}
+
+const KontoRouteRouteWithChildren = KontoRouteRoute._addFileChildren(
+  KontoRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   authRouteRoute: authRouteRouteWithChildren,
-  ProductsProductRoute: ProductsProductRoute,
-  ProductsIndexRoute: ProductsIndexRoute,
+  CategoryRouteRoute: CategoryRouteRouteWithChildren,
+  KontoRouteRoute: KontoRouteRouteWithChildren,
+  AnnonceIndexRoute: AnnonceIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

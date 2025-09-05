@@ -4,13 +4,11 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-app-primary: #2563eb;
-  --color-app-secondary: #64748b;
-  --color-app-accent: #f59e42;
-  --color-app-background: #f8fafc;
-  --color-app-surface: #ffffff;
-  --color-app-text: #1e293b;
-  --color-app-muted: #94a3b8;
+  --color-app-primary: #1d8439;
+  --color-app-secondary: #952e0d;
+  --color-app-accent: #00a676;
+  --color-app-background: #ffffff;
+  --color-app-surface: #f5f5f5;
 }
 
 @theme inline {
@@ -123,8 +121,5 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-app-surface text-foreground;
   }
 }

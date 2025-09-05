@@ -1,5 +1,13 @@
 import { BACKEND_URL } from "./constants";
-import { LoginFormSchema, SignupFormSchema, type FormState } from "./types";
+import {
+  AnnonceFormSchema,
+  LoginFormSchema,
+  ProfileFormSchema,
+  SignupFormSchema,
+  type AnnonceFormState,
+  type FormState,
+  type ProfileFormState,
+} from "./types";
 
 export const login = async (
   _state: FormState,
@@ -49,18 +57,26 @@ export const signup = async (
   formData: FormData
 ): Promise<FormState> => {
   const validatedFields = SignupFormSchema.safeParse({
-    name: formData.get("name"),
     email: formData.get("email"),
     password: formData.get("password"),
+    firstname: formData.get("firstname"),
+    lastname: formData.get("lastname"),
+    address: formData.get("address"),
+    city: formData.get("city"),
+    zipcode: formData.get("zipcode"),
   });
 
   if (!validatedFields.success) {
     const fieldErrors = validatedFields.error.flatten().fieldErrors;
     return {
       error: {
-        name: fieldErrors.name,
         email: fieldErrors.email,
         password: fieldErrors.password,
+        firstname: fieldErrors.firstname,
+        lastname: fieldErrors.lastname,
+        address: fieldErrors.address,
+        city: fieldErrors.city,
+        zipcode: fieldErrors.zipcode,
       },
     };
   }
@@ -72,9 +88,9 @@ export const signup = async (
     },
     body: JSON.stringify({
       ...validatedFields.data,
-      image: "1",
       isActive: 1,
-      description: "test",
+      hasNewsletter: true,
+      hasNotification: true,
       refreshToken: "refreshToken",
     }),
   });
@@ -84,9 +100,112 @@ export const signup = async (
   } else {
     return {
       message:
-        response.status === 409
+        response.status === 500
           ? "The user already existed!"
           : response.statusText,
+    };
+  }
+};
+
+export const annonce = async (
+  _state: AnnonceFormState,
+  formData: FormData,
+  accessToken?: string
+) => {
+  const validatedFields = AnnonceFormSchema.safeParse({
+    title: formData.get("title"),
+    category: Number(formData.get("category")),
+    text: formData.get("text"),
+    url: formData.get("url"),
+    price: Number(formData.get("price")),
+  });
+
+  if (!validatedFields.success) {
+    const fieldErrors = validatedFields.error.flatten().fieldErrors;
+    return {
+      error: {
+        title: fieldErrors.title,
+        category: fieldErrors.category,
+        text: fieldErrors.text,
+        url: fieldErrors.url,
+        price: fieldErrors.price,
+      },
+    };
+  }
+
+  const response = await fetch(`${BACKEND_URL}/products`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      name: validatedFields.data.title,
+      image: validatedFields.data.url,
+      description: validatedFields.data.text,
+      price: validatedFields.data.price,
+      categoryId: validatedFields.data.category,
+    }),
+  });
+
+  if (response.ok) {
+    return { success: true };
+  } else {
+    return {
+      message: response.statusText,
+    };
+  }
+};
+
+export const profile = async (
+  _state: ProfileFormState,
+  formData: FormData,
+  id: number
+) => {
+  const validatedFields = ProfileFormSchema.safeParse({
+    email: formData.get("email"),
+    password: formData.get("password") ?? "",
+    firstname: formData.get("firstname"),
+    lastname: formData.get("lastname"),
+    address: formData.get("address"),
+    city: formData.get("city"),
+    zipcode: Number(formData.get("zipcode")),
+    hasNewsletter: formData.get("hasNewsletter") == "on" ? true : false,
+    hasNotification: formData.get("hasNotification") == "on" ? true : false,
+  });
+
+  if (!validatedFields.success) {
+    const fieldErrors = validatedFields.error.flatten().fieldErrors;
+    return {
+      error: {
+        email: fieldErrors.email,
+        password: fieldErrors.password,
+        firstname: fieldErrors.firstname,
+        lastname: fieldErrors.lastname,
+        address: fieldErrors.address,
+        city: fieldErrors.city,
+        zipcode: fieldErrors.zipcode,
+        hasNewsletter: fieldErrors.hasNewsletter,
+        hasNotification: fieldErrors.hasNotification,
+      },
+    };
+  }
+
+  const response = await fetch(`${BACKEND_URL}/users/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ...validatedFields.data,
+    }),
+  });
+
+  if (response.ok) {
+    return { success: true };
+  } else {
+    return {
+      message: response.statusText,
     };
   }
 };

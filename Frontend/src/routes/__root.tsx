@@ -14,9 +14,8 @@ export const Route = createRootRoute({
       {/* auth and userData */}
       <AuthProvider>
         <Header />
-        <section className="min-h-[calc(100vh-80px)]">
-          <Outlet />
-        </section>
+        <hr className="py-[2px] bg-app-primary my-10 container mx-auto" />
+        <Outlet />
         <Toaster />
         <Footer />
         {/* Add dev tools for router */}
@@ -32,19 +31,19 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "A modern, responsive web template built with React, Vite, and Tailwind CSS. Includes authentication, routing, and beautiful UI components.",
+          "Den Grønne Avis er en brugt handels markedsplads, hvor hver handel støtter klimaet. Køb og sælg brugte varer nemt og intuitivt.",
       },
       {
-        title: "My Template",
+        title: "Den Grønne Avis - Brugt handels markedsplads for klimaet",
       },
       {
         name: "keywords",
         content:
-          "React, Vite, Tailwind, Tanstack, Template, Authentication, Routing, Web App, UI, Modern, Responsive",
+          "Den Grønne Avis, brugt marked, klima, genbrug, handel, bæredygtighed, køb, salg, miljø",
       },
       {
         name: "author",
-        content: "William Leander Jensen",
+        content: "Den Grønne Avis",
       },
       {
         name: "viewport",
@@ -52,13 +51,13 @@ export const Route = createRootRoute({
       },
       {
         name: "theme-color",
-        content: "#2563eb",
+        content: "#1d8439",
       },
     ],
     links: [
       {
         rel: "icon",
-        href: "/icons/Template-White.png",
+        href: "/favicon/favicon-32x32.png",
       },
     ],
   }),
