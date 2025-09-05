@@ -1,28 +1,35 @@
-# Den grønne avis
-## Svendeprøve-prøve August 2025
-Front- og backend til svendeprøve-prøve Den grønne avis, August 2025
+# Den Grønne Avis
 
-# Backend
+Den Grønne Avis er en digital markedsplads, hvor du kan købe og sælge brugte varer nemt og sikkert. For hver handel donerer vi et beløb til klimaet – så du gør en forskel, hver gang du handler.
 
-* **Formål:** Pre-installeret REST API.
-* **Stack:** Node.js, Express, TypeScript, Prisma.
-* **Database:** MySQL (kræver `DATABASE_URL` i `.env`).
-* **Struktur:** `src/` (routes, controllers, middleware), `prisma/` (schema & migrations).
-* **Kom i gang:**
+## Formål
 
-  1. `npm install`
-  2. Opret `.env` med `DATABASE_URL=...`
-  3. (Første gang) `npx prisma migrate dev`
-  4. `npm run dev` for at starte API’et
+Vi gør det let for alle at handle brugt og bidrage til et bedre miljø. Siden er intuitiv og brugervenlig for både købere og sælgere.
 
-# Frontend
+## Funktioner
 
-* **Formål:** Her bygger eleverne hele frontend-projektet.
-* **Stack:** React + Vite.
-* **API-adresse (valgfrit):** Sæt `VITE_API_URL` i `.env` hvis UI’et skal pege på en anden backend-URL.
-* **Kom i gang:**
+- Opret og administrer dine egne annoncer
+- Søg og filtrer produkter efter kategori
+- Opret en bruger og log ind
+- Skriv beskeder direkte til sælgere
+- Se og redigér din profil
 
-  1. `npm install`
-  2. `npm run dev` for at starte Vite-udviklerserveren
+## Klima-fokus
 
-> Tip: Kør backend først, så frontend kan hente data fra API’et.
+Den Grønne Avis støtter klimaet ved at donere for hver gennemført handel. Jo mere du handler, jo mere hjælper du miljøet.
+
+## Teknologi
+
+- Frontend: React + Vite
+- Backend: Node.js, Express, TypeScript, Prisma
+- Database: MySQL
+
+## Kom i gang
+
+1. Start backend (se backend README)
+2. lave en env file se env.example
+3. Start frontend med:
+   ```bash
+   npm install
+   npm run dev
+   ```
