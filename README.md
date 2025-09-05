@@ -9,7 +9,6 @@ Vi gør det let for alle at handle brugt og bidrage til et bedre miljø. Siden e
 ## Funktioner
 
 - Opret og administrer dine egne annoncer
-- Søg og filtrer produkter efter kategori
 - Opret en bruger og log ind
 - Skriv beskeder direkte til sælgere
 - Se og redigér din profil
