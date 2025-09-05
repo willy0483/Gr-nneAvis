@@ -15,10 +15,16 @@ export const Route = createFileRoute("/konto/annoncer/")({
   ),
   head: () => ({
     meta: [
-      { title: `Produkt: | My Template` },
+      { title: "Mine Annoncer - Den Grønne Avis" },
       {
         name: "description",
-        content: `Se detaljer, ingredienser og fremgangsmåde for produktet i My Template.`,
+        content:
+          "Se og administrer dine annoncer på Den Grønne Avis. Få overblik over dine produkter og fjern dem nemt.",
+      },
+      {
+        name: "keywords",
+        content:
+          "annoncer, produkter, bruger, Den Grønne Avis, genbrug, handel, miljø",
       },
     ],
   }),

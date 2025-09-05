@@ -29,7 +29,6 @@ export const SignUpForm = () => {
       });
       navigate({ to: "/login" });
     }
-    console.log(state);
   }, [state, state?.success, state?.message, navigate]);
 
   const togglePasswordVisibility = () => {
